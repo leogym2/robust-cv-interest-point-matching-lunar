@@ -85,9 +85,31 @@ These heatmaps represent the final stage of the pipeline, summarizing the overal
 
 ---
 
-## Key Takeaways
+### 3. Overall Summary
 
-- **SIFT** remains more robust to viewpoint differences but suffers under extreme illumination changes.  
-- **SuperPoint** is highly resilient to exposure changes but loses consistency when geometry varies.  
-- **SuperPoint + SuperGlue** improves match stability, especially under illumination variation, but still struggles with wide-baseline geometry.  
-- No single method dominates in all conditions, making the choice method-dependent: illumination-driven tasks favor learned features, while geometric changes favor classical approaches.
+The three pipelines exhibit complementary strengths, and no single method performs best across all conditions.  
+Their behaviour can be summarized as follows:
+
+- **SIFT** offers the strongest robustness to viewpoint changes. Its handcrafted geometric invariance allows it to maintain reliable matches even when the camera position shifts significantly.
+- **SuperPoint** is the most resilient to illumination variation. Its learned features remain stable across large exposure differences but degrade sharply when viewpoint changes.
+- **SuperPoint + SuperGlue** forms the most stable pipeline when viewpoint remains similar. SuperGlue effectively regularizes correspondences and improves consistency, but cannot fully compensate for SuperPoint’s limited geometric invariance.
+
+**In general:**  
+- For **illumination-driven challenges**, SuperPoint (with or without SuperGlue) is the most suitable choice.  
+- For **large viewpoint differences**, SIFT remains the most reliable.  
+- For **scenarios with moderate changes in both illumination and viewpoint**, SuperPoint + SuperGlue strikes the best balance, approaching—but not surpassing—SIFT’s performance.
+
+These trade-offs are especially relevant for operational scenarios such as DEM reconstruction and rover navigation, where lighting conditions and camera geometry may vary unpredictably.
+
+
+---
+
+### Future Improvements
+
+- Using additional sequences from the POLAR dataset (or other lunar-analog datasets) would help assess how performance generalizes across terrains and lighting conditions.
+
+- Include additional feature-matching methods (e.g., ORB, R2D2, D2-Net, ALIKED) to broaden the comparison between classical, hybrid, and modern learned approaches.
+
+- Incorporate additional quantitative metrics (e.g., repeatability, matching precision/recall, or pose-estimation error) to support a more complete and objective comparison between methods.
+
+
