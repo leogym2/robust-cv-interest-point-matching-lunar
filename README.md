@@ -24,13 +24,13 @@ The project follows a three-step workflow:
 **(1) keypoint detection**, **(2) feature matching**, and **(3) robustness evaluation through heatmaps**.
 
 ### 1. Keypoint Detection
-I began by extracting interest points from POLAR images.  
+I began by extracting interest points from POLAR img.  
 
 - Using **SIFT**, I computed scale- and rotation-invariant keypoints on lunar-like scenes:  
-  ![SIFT Keypoints](images/SIFT_points.png)
+  ![SIFT Keypoints](img/SIFT_points.png)
 
 - I then repeated the detection using **SuperPoint**, which produces learned keypoints that behave differently under strong illumination gradients:  
-  ![SuperPoint Keypoints](images/SuperPoint_points.png)
+  ![SuperPoint Keypoints](img/SuperPoint_points.png)
 
 These visualizations illustrate the first stage of the pipeline: identifying stable features under extreme lighting.
 
@@ -40,10 +40,10 @@ These visualizations illustrate the first stage of the pipeline: identifying sta
 After detecting keypoints, I computed correspondences between image pairs with different exposures or viewpoints.
 
 - I first evaluated **SuperPoint descriptor matching** using nearest-neighbor association:  
-  ![SuperPoint Matching](images/SuperPoint_matching.png)
+  ![SuperPoint Matching](img/SuperPoint_matching.png)
 
 - Next, I applied **SuperPoint + SuperGlue**, where SuperGlue refines correspondences using attention and graph neural networks:  
-  ![SuperGlue Matching](images/SuperGlue_matching.png)
+  ![SuperGlue Matching](img/SuperGlue_matching.png)
 
 These steps show how each method handles geometric and illumination changes when establishing pixel-level correspondences.
 
@@ -57,16 +57,16 @@ Below are the heatmaps produced for all methods under both scenarios:
 **same viewpoint** (illumination change only) and **different viewpoint** (illumination + geometry change).
 
 #### SIFT
-![SIFT Same View](images/SIFT.png)  
-![SIFT Different View](images/SIFT_diff.png)
+![SIFT Same View](img/SIFT.png)  
+![SIFT Different View](img/SIFT_diff.png)
 
 #### SuperPoint
-![SuperPoint Same View](images/SuperPoint.png)  
-![SuperPoint Different View](images/SuperPoint_diff.png)
+![SuperPoint Same View](img/SuperPoint.png)  
+![SuperPoint Different View](img/SuperPoint_diff.png)
 
 #### SuperPoint + SuperGlue
-![SuperGlue Same View](images/SuperGlue.png)  
-![SuperGlue Different View](images/SuperGlue_diff.png)
+![SuperGlue Same View](img/SuperGlue.png)  
+![SuperGlue Different View](img/SuperGlue_diff.png)
 
 These heatmaps represent the final stage of the pipeline, summarizing the overall robustness of each method under varying exposure and viewpoint conditions.
 
