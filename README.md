@@ -1,6 +1,7 @@
+## Robust Computer Vision point matching on lunar analog surface
 ### SIFT vs SuperPoint vs SuperPoint+SuperGlue on the POLAR Dataset
 
-In this notebook I evaluate 3 different methods for interest point detection and matching on lunar-like terrain images: **SIFT**, a classical computer vision algorithm, and **SuperPoint**, a modern deep-learning-based feature extractor and **Superpoin+SuperGlue**. 
+In this project I evaluate 3 different methods for interest point detection and matching on lunar-like terrain images: **SIFT**, a classical computer vision algorithm, and **SuperPoint**, a modern deep-learning-based feature extractor and **Superpoin+SuperGlue**. 
 
 **What is the problem?**  
 Feature matching on lunar imagery is challenging due to extreme illumination variations (deep shadows, backlighting, high contrast). These conditions significantly affect the stability of keypoints and descriptors.
