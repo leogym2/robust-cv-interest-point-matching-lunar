@@ -1,7 +1,7 @@
 <p align="center">
   <img src="img/SuperPoint_points.png" height="180">
-  <img src="img/SIFT_matching" height="180">
-  <img src="img/SIFT.png" height="180">
+  <img src="img/SuperPoint_matching" height="180">
+  <img src="img/SuperGlue.png" height="180">
 </p>
 
 
