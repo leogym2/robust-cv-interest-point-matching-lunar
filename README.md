@@ -16,3 +16,65 @@ Robust feature matching is a fundamental step in the reconstruction of Digital E
 
 **What is the goal of the work?**  
 To evaluate and compare the robustness of these methods under illumination and viewpoint changes, using sample data from the **NASA POLAR Traverses** dataset, which simulates lunar polar lighting conditions.
+
+
+## What was done
+
+The project follows a three-step workflow:  
+**(1) keypoint detection**, **(2) feature matching**, and **(3) robustness evaluation through heatmaps**.
+
+### 1. Keypoint Detection
+I began by extracting interest points from POLAR images.  
+
+- Using **SIFT**, I computed scale- and rotation-invariant keypoints on lunar-like scenes:  
+  ![SIFT Keypoints](images/SIFT_points.png)
+
+- I then repeated the detection using **SuperPoint**, which produces learned keypoints that behave differently under strong illumination gradients:  
+  ![SuperPoint Keypoints](images/SuperPoint_points.png)
+
+These visualizations illustrate the first stage of the pipeline: identifying stable features under extreme lighting.
+
+---
+
+### 2. Feature Matching
+After detecting keypoints, I computed correspondences between image pairs with different exposures or viewpoints.
+
+- I first evaluated **SuperPoint descriptor matching** using nearest-neighbor association:  
+  ![SuperPoint Matching](images/SuperPoint_matching.png)
+
+- Next, I applied **SuperPoint + SuperGlue**, where SuperGlue refines correspondences using attention and graph neural networks:  
+  ![SuperGlue Matching](images/SuperGlue_matching.png)
+
+These steps show how each method handles geometric and illumination changes when establishing pixel-level correspondences.
+
+---
+
+### 3. Robustness Evaluation (Heatmaps)
+Finally, I evaluated how stable the matches were across all exposure combinations.  
+For each pair, I computed **RANSAC inlier ratios**, then organized them into heatmaps.
+
+Below are the heatmaps produced for all methods under both scenarios:  
+**same viewpoint** (illumination change only) and **different viewpoint** (illumination + geometry change).
+
+#### SIFT
+![SIFT Same View](images/SIFT.png)  
+![SIFT Different View](images/SIFT_diff.png)
+
+#### SuperPoint
+![SuperPoint Same View](images/SuperPoint.png)  
+![SuperPoint Different View](images/SuperPoint_diff.png)
+
+#### SuperPoint + SuperGlue
+![SuperGlue Same View](images/SuperGlue.png)  
+![SuperGlue Different View](images/SuperGlue_diff.png)
+
+These heatmaps represent the final stage of the pipeline, summarizing the overall robustness of each method under varying exposure and viewpoint conditions.
+
+---
+
+## Key Takeaways
+
+- **SIFT** remains more robust to viewpoint differences but suffers under extreme illumination changes.  
+- **SuperPoint** is highly resilient to exposure changes but loses consistency when geometry varies.  
+- **SuperPoint + SuperGlue** improves match stability, especially under illumination variation, but still struggles with wide-baseline geometry.  
+- No single method dominates in all conditions, making the choice method-dependent: illumination-driven tasks favor learned features, while geometric changes favor classical approaches.
