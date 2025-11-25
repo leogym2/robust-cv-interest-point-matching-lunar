@@ -1,3 +1,10 @@
+<p align="center">
+  <img src="img/SIFT_points.png" width="30%">
+  <img src="img/SIFT_matching.png" width="30%">
+  <img src="img/SIFT.png" width="30%">
+</p>
+
+
 ## Robust Computer Vision point matching on lunar analog surface
 ### SIFT vs SuperPoint vs SuperPoint+SuperGlue on the POLAR Dataset
 
